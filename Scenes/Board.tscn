@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dch1fhjcxhhxi"]
+
+[ext_resource type="Script" path="res://Scripts/Board.cs" id="1_jd1yj"]
+[ext_resource type="Script" path="res://Scripts/CameraControl.cs" id="2_r7naj"]
+
+[sub_resource type="Environment" id="Environment_sdp78"]
+ambient_light_color = Color(0.377919, 0.377919, 0.377919, 1)
+
+[node name="Board" type="Node3D"]
+script = ExtResource("1_jd1yj")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.527475, 0.849571, 0, -0.849571, 0.527475, 1.5, 5, 5)
+environment = SubResource("Environment_sdp78")
+script = ExtResource("2_r7naj")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.0763671, 0.702971, -0.707107, -0.0763671, 0.702971, 0.707107, 0.994151, 0.107999, -3.09086e-08, -2.46491, 2.02933, 0)
+shadow_enabled = true
+
+[node name="Placements" type="Node3D" parent="."]

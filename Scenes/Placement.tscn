@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://jva46d6lfcmc"]
+
+[ext_resource type="Script" path="res://Scripts/Placement.cs" id="1_cqcxx"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_cnnhy"]
+
+[node name="Placement" type="Node3D"]
+script = ExtResource("1_cqcxx")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_cnnhy")
