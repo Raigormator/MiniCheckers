@@ -10,6 +10,8 @@ namespace MiniCheckers
 
 		private Piece _piece;
 
+		private PlacementLabel _placementLabel;
+
 		public string PlacementCode {
 			get { return _placementCode; }
 			set { _placementCode = value; }
@@ -18,6 +20,11 @@ namespace MiniCheckers
 		public Piece Piece {
 			get { return _piece; }
 			set { _piece = value; }
+		}
+
+		public PlacementLabel PlacementLabel {
+			get { return _placementLabel; }
+			set { _placementLabel = value; }
 		}
 
 		// Called when the node enters the scene tree for the first time.

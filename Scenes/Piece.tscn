@@ -1,22 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://w8nbhqil006e"]
+[gd_scene load_steps=3 format=3 uid="uid://w8nbhqil006e"]
 
 [ext_resource type="Script" path="res://Scripts/Piece.cs" id="1_1ta74"]
-[ext_resource type="Texture2D" uid="uid://cx1fesej0ucib" path="res://Textures/BlackPiece_texture.png" id="1_pnclv"]
-[ext_resource type="Texture2D" uid="uid://dx054wdym8hwb" path="res://Textures/WhitePiece_texture.png" id="1_sfsjg"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d0u0w"]
-albedo_texture = ExtResource("1_sfsjg")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fw5j3"]
-albedo_texture = ExtResource("1_pnclv")
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_jsg8t"]
-material = SubResource("StandardMaterial3D_fw5j3")
 
 [node name="Piece" type="Node3D"]
 script = ExtResource("1_1ta74")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.8, 0, 0, 0, 0.1, 0, 0, 0, 0.8, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_d0u0w")
 mesh = SubResource("CylinderMesh_jsg8t")

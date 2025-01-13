@@ -30,12 +30,14 @@ namespace MiniCheckers {
 			for (int x = 0; x < boardSize; x++) {
 				for (int z = 0; z < boardSize; z++) {
 					Placement placementNode;
+					string placementCode = BoardUtility.CreatePlacementCode(x, z);
+
 					if ((x + z) % 2 == 0) {
-						placementNode = placementService.SetupPlacement("DARK", new Vector3(xPos, 0, zPos));
+						placementNode = placementService.SetupPlacement("DARK", new Vector3(xPos, 0, zPos), placementCode);
 					} else {
-						placementNode = placementService.SetupPlacement("LIGHT", new Vector3(xPos, 0, zPos));
+						placementNode = placementService.SetupPlacement("LIGHT", new Vector3(xPos, 0, zPos), placementCode);
 					}
-					board.AddChild(BoardUtility.CreatePlacementCode(x, z), placementNode);
+					board.AddChild(placementCode, placementNode);
 
 					zPos += 1;
 				}
