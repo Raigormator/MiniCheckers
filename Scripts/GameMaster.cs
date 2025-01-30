@@ -10,6 +10,14 @@ namespace MiniCheckers {
 		public float grabDistance = 10;
 		public Vector2 mouse;
 		public const float DIST = 1000;
+		public StaticBody3D boardPlacement = null;
+		public Placement placement = null;
+		private PlacementService placementService;
+
+		public override void _Ready()
+		{
+			placementService = PlacementService.Instantiate();
+		}
 
 		public override void _Process(double delta)
 		{
@@ -18,7 +26,7 @@ namespace MiniCheckers {
 			}
 
 			if (grabbedObject is RigidBody3D) {
-				LiftItem(grabbedObject, GetGrabPosition(), (float) delta);
+				ShowGhostPiece(boardPlacement);
 			} else {
 				grabbedObject.Position = GetGrabPosition();
 			}
@@ -27,6 +35,8 @@ namespace MiniCheckers {
 		public override void _Input(InputEvent @event) {
 			if (@event is InputEventMouseMotion) {
 				mouse = ((InputEventMouseMotion) @event).Position;
+				
+				GetMouseWorldPos(mouse);
 			}
 
 			if (@event is InputEventMouseButton) {
@@ -49,13 +59,14 @@ namespace MiniCheckers {
 			query.From = start;
 			query.To = end;
 
-			Console.WriteLine(query.From);
-			Console.WriteLine(query.To);
-
 			var result = space.IntersectRay(query);
 			foreach (KeyValuePair<Variant, Variant> variant in result) {
 				if (((string) variant.Key).Equals("collider") && variant.Value.Obj is RigidBody3D) {
 					grabbedObject = (RigidBody3D) variant.Value.Obj;	
+				}
+
+				if (((string) variant.Key).Equals("collider") && variant.Value.Obj is StaticBody3D) {
+					boardPlacement = (StaticBody3D) variant.Value.Obj;
 				}
 			}
 		}
@@ -64,15 +75,31 @@ namespace MiniCheckers {
 			return GetViewport().GetCamera3D().ProjectPosition(mouse, grabDistance);
 		}
 
-		private void LiftItem(RigidBody3D item, Vector3 targetPosition, float delta) {
-			float influence = 500.0f;
-			float stiffness = 20.0f;
-			targetPosition.Y = 2f;
-			var position = targetPosition - item.GlobalPosition;
-			var mass = item.Mass;
-			var velocity = item.LinearVelocity;
-			var impulse = (influence * position) - (stiffness * mass * velocity);
-			item.ApplyCentralImpulse(impulse * delta);
+		private void ShowGhostPiece(StaticBody3D boardPlacement) {
+			if (!(boardPlacement.GetParent() is Placement)) {
+				return;
+			}
+
+			Placement varPlacement = (Placement) boardPlacement.GetParent();
+
+			if (placement != null && placement.PlacementCode == varPlacement.PlacementCode) {
+				return; 
+			}
+
+			placement = boardPlacement.GetParent() as Placement;
+
+			Console.WriteLine("Placement is Valid: " + placement);
 		}
+
+		// private void LiftItem(RigidBody3D item, Vector3 targetPosition, float delta) {
+		// 	float influence = 500.0f;
+		// 	float stiffness = 20.0f;
+		// 	targetPosition.Y = 2f;
+		// 	var position = targetPosition - item.GlobalPosition;
+		// 	var mass = item.Mass;
+		// 	var velocity = item.LinearVelocity;
+		// 	var impulse = (influence * position) - (stiffness * mass * velocity);
+		// 	item.ApplyCentralImpulse(impulse * delta);
+		// }
 	}
 }

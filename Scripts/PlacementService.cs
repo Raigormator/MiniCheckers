@@ -20,7 +20,7 @@ namespace MiniCheckers {
 			}
 
 			return placementService;
-		} 
+		}
 
 		private PlacementService() {
 			lightTexturePlacement = (Texture2D) GD.Load("res://Textures/LightPlacement_texture.png");
@@ -64,6 +64,8 @@ namespace MiniCheckers {
 				throw new Exception("Specified Texture Code is not supported: " + textureCode);
 			}
 		}
+
+		
 	}
 
 }
