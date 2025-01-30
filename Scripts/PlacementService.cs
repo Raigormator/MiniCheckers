@@ -16,9 +16,6 @@ namespace MiniCheckers {
 
 		public static PlacementService Instantiate() {
 			if (placementService == null) {
-				lightTexturePlacement = (Texture2D) GD.Load("res://Textures/LightPlacement_texture.png");
-				darkTexturePlacement = (Texture2D) GD.Load("res://Textures/DarkPlacement_texture.png");
-
 				placementService = new PlacementService();
 			}
 
@@ -26,6 +23,9 @@ namespace MiniCheckers {
 		} 
 
 		private PlacementService() {
+			lightTexturePlacement = (Texture2D) GD.Load("res://Textures/LightPlacement_texture.png");
+			darkTexturePlacement = (Texture2D) GD.Load("res://Textures/DarkPlacement_texture.png");
+
 			placementScene = GD.Load<PackedScene>("res://Scenes/Placement.tscn");
 			placementLabelScene = GD.Load<PackedScene>("res://Scenes/PlacementLabel.tscn");
 		}

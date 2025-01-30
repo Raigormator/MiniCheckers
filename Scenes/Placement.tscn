@@ -1,11 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://jva46d6lfcmc"]
+[gd_scene load_steps=4 format=3 uid="uid://jva46d6lfcmc"]
 
 [ext_resource type="Script" path="res://Scripts/Placement.cs" id="1_cqcxx"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tcod7"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_cnnhy"]
 
 [node name="Placement" type="Node3D"]
 script = ExtResource("1_cqcxx")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_tcod7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
 mesh = SubResource("BoxMesh_cnnhy")
+skeleton = NodePath("../..")

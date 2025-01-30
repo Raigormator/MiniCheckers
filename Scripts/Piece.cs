@@ -7,6 +7,10 @@ namespace MiniCheckers {
 		// Called when the node enters the scene tree for the first time.
 		public override void _Ready()
 		{
+			foreach (var x in this.GetChildren()) {
+				Console.WriteLine(x.Name);
+			}
+
 			
 		}
 

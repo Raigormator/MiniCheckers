@@ -15,9 +15,6 @@ namespace MiniCheckers {
 
 		public static PieceService Instantiate() {
 			if (pieceService == null) {
-				whiteTexturePiece = (Texture2D) GD.Load("res://Textures/WhitePiece_texture.png");
-				blackTexturePiece = (Texture2D) GD.Load("res://Textures/BlackPiece_texture.png");
-
 				pieceService = new PieceService();
 			}
 
@@ -25,6 +22,9 @@ namespace MiniCheckers {
 		}
 
 		private PieceService() {
+			whiteTexturePiece = (Texture2D) GD.Load("res://Textures/WhitePiece_texture.png");
+			blackTexturePiece = (Texture2D) GD.Load("res://Textures/BlackPiece_texture.png");
+
 			pieceScene = GD.Load<PackedScene>("res://Scenes/Piece.tscn");
 		}
 
